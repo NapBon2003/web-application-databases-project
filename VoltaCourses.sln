@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoltaCourses", "VoltaCourses\VoltaCourses.csproj", "{EE20842C-1234-4381-A6D4-D0DE5DE94DB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE20842C-1234-4381-A6D4-D0DE5DE94DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE20842C-1234-4381-A6D4-D0DE5DE94DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE20842C-1234-4381-A6D4-D0DE5DE94DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE20842C-1234-4381-A6D4-D0DE5DE94DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED156D3A-E198-4177-8AD6-CC979D4F0C73}
+	EndGlobalSection
+EndGlobal
