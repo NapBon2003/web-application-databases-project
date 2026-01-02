@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ElectronicCourses.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "Moje kursy";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <!-- nagłówek -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Moje kursy</h1>
+        <p class="lead">Tutaj znajdziesz wszystkie kursy, na które jesteś zapisany.</p>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-dark border-orange text-center">
+            <h4 class="alert-heading">Brak kursów</h4>
+            <p>Nie jesteś jeszcze zapisany na żaden kurs.</p>
+            <p class="mb-3">👉 Zaloguj się i zapisz na kurs, aby rozpocząć naukę!</p>
+            <a asp-controller="Courses" asp-action="Index" class="btn btn-orange mt-2">Zobacz dostępne kursy</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var enrollment in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark border-light h-100 shadow-sm">
+
+                        <!-- placeholder (taki sam jak w Index) -->
+                        <div class="text-center mb-0 rounded-0" style="min-height:40px;">
+                            <div class="py-2 mb-0">&nbsp;</div>
+                        </div>
+
+                        <!-- obrazek kursu (z warunkiem) -->
+                        <img src="@(string.IsNullOrEmpty(enrollment.Course.CoverImagePath)
+                                                                  ? Url.Content("~/images/default_course.jpg")
+                                                                  : enrollment.Course.CoverImagePath)"
+                             alt="Kurs @enrollment.Course.Title"
+                             class="card-img-top"
+                             style="max-height:200px; object-fit:cover;" />
+
+                        <!-- time (taki sam jak w Index) -->
+                        <div class="card-body text-light">
+                            <h5 class="card-title">@enrollment.Course.Title</h5>
+                            <p><strong>⏱ Czas trwania: @enrollment.Course.Hours godzin</strong></p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <a asp-controller="Courses" asp-action="Details" asp-route-id="@enrollment.Course.Id"
+                               class="btn btn-orange">Przejdź do kursu</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- div zachęcający do kolejnego kursu -->
+        <div class="alert alert-info text-center mt-5">
+            Chcesz więcej? Dołącz do kolejnego kursu i rozwijaj swoje umiejętności!
+            <br />
+            <a asp-controller="Courses" asp-action="Index" class="btn btn-orange mt-3">Zobacz dostępne kursy</a>
+        </div>
+    }
+</div>

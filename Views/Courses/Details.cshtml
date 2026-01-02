@@ -1,0 +1,137 @@
+﻿@model ElectronicCourses.Models.Course
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Szczegóły kursu";
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var isEnrolled = Model.Enrollments.Any(e => e.UserId == userId);
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <!-- baner kursu -->
+    <div class="mb-5">
+        <div class="card bg-dark border-light shadow-lg p-3">
+            <div class="row g-0 align-items-center">
+                <!-- obrazek po lewej stronie -->
+                <div class="col-md-5">
+                    <img src="@(string.IsNullOrEmpty(Model.CoverImagePath)
+                                                         ? Url.Content("~/images/default_course.jpg")
+                                                         : Model.CoverImagePath)"
+                         alt="Obrazek kursu @Model.Title"
+                         class="img-fluid rounded"
+                         style="max-height:400px; object-fit:cover; width:100%;" />
+                </div>
+                <!-- tekst po prawej stronie -->
+                <div class="col-md-7">
+                    <div class="card-body text-light">
+                        <h2 class="card-title mb-3">@Model.Title</h2>
+                        <p class="card-text mb-3">@Model.Description</p>
+                        <p class="card-text">
+                            <strong>⏱ Czas trwania:</strong> @Model.Hours godzin
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+        {
+            if (isEnrolled)
+            {
+                <a asp-controller="Courses" asp-action="Player" asp-route-id="@Model.Id"
+                   class="btn btn-orange btn-lg mt-3">▶️ Otwórz kurs</a>
+            }
+        }
+    <!-- lista modułów dla kursu-->
+    @if (isEnrolled || User.IsInRole("Admin"))
+    {
+        <div class="mb-5">
+            <h3>Moduły kursu</h3>
+            @if (Model.Modules == null || !Model.Modules.Any())
+            {
+                <div class="alert alert-dark border-orange mt-3">
+                    Brak modułów przypisanych do tego kursu.
+                </div>
+            }
+            else
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var module in Model.Modules.OrderBy(m => m.Order))
+                    {
+                        <li class="list-group-item bg-dark text-light border-secondary">
+                            <div class="d-flex align-items-center p-3 alert alert-secondary mb-0">
+                                <!-- duża liczba kolejności -->
+                                <div class="me-3 display-4 fw-bold text-orange">
+                                    @module.Order
+                                </div>
+
+                                <!-- treść modułu -->
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">@module.Title</h5>
+                                    @if (!string.IsNullOrEmpty(module.Content))
+                                    {
+                                        <p class="mb-2">@module.Content</p>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+
+            <!-- przycisk (dla administratora) -->
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="text-center mt-4">
+                    <a asp-controller="Modules" asp-action="Index" class="btn btn-warning btn-lg">
+                        Modyfikuj moduły
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- enrollment buttons (przyciski do zapisu/wypisu z kursu) -->
+    <div class="text-center mt-4">
+        @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+        {
+            if (isEnrolled)
+            {
+                <form asp-controller="Enrollments" asp-action="Delete" method="post">
+                    <input type="hidden" name="courseId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger btn-lg">Wypisz się z kursu</button>
+                </form>
+            }
+            else
+            {
+                <form asp-controller="Enrollments" asp-action="CreatePost" method="post">
+                    <input type="hidden" name="courseId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-orange btn-lg">Zapisz się na kurs</button>
+                </form>
+            }
+        }
+        else if (User.IsInRole("Admin"))
+        {
+            <div class="alert alert-warning mt-3">
+                Administrator nie może zapisywać się na kursy.
+            </div>
+
+            <div class="mt-3 d-flex justify-content-center gap-3">
+                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-info btn-lg">✏️ Edytuj kurs</a>
+
+                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-danger btn-lg">🗑 Usuń kurs</a>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-dark border-orange mt-3">
+                Zaloguj się, aby zapisać się na kurs.
+                <hr />
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-orange me-2">Zaloguj się</a>
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-orange">Zarejestruj się</a>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model ElectronicCourses.Models.Course
+
+@{
+    ViewData["Title"] = "Usuń kurs";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <h2 class="mb-4">Czy na pewno chcesz usunąć kurs?</h2>
+
+    <div class="alert alert-warning">
+        <strong>@Model.Title</strong><br />
+        @Model.Description
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Usuń kurs i wszystkie zapisy</button>
+        <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>

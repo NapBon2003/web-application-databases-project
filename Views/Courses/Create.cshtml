@@ -1,0 +1,57 @@
+﻿@model ElectronicCourses.Models.Course
+
+@{
+    ViewData["Title"] = "Dodaj kurs";
+}
+
+<!-- Kod odpowiedzialny za dodawanie kursu z panelu administatora -->
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <!-- nagłówek -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Dodaj nowy kurs</h1>
+        <p class="lead">Uzupełnij poniższe pola, aby utworzyć kurs.</p>
+    </div>
+
+    <!-- form (formularz) -->
+        <form asp-action="Create" method="post" class="shadow-lg p-4 rounded bg-dark border border-secondary" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- tytuł -->
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label fw-bold"></label>
+            <input asp-for="Title" class="form-control bg-dark text-light border-secondary" placeholder="Wpisz tytuł kursu" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <!-- opis -->
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label fw-bold"></label>
+            <textarea asp-for="Description" class="form-control bg-dark text-light border-secondary" rows="4" placeholder="Dodaj opis kursu"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- czas trwania -->
+        <div class="mb-3">
+            <label asp-for="Hours" class="form-label fw-bold"></label>
+            <input asp-for="Hours" type="number" min="0" class="form-control bg-dark text-light border-secondary" placeholder="Podaj liczbę godzin" />
+            <span asp-validation-for="Hours" class="text-danger"></span>
+        </div>
+        <!-- okładka kursu --> 
+        <div class="mb-3"> 
+            <label class="form-label fw-bold">Okładka kursu</label> 
+            <input type="file" name="CoverImage" class="form-control bg-dark text-light border-secondary" /> 
+        </div>
+        <!-- przyciski -->
+        <div class="d-flex justify-content-between mt-4">
+            <button class="btn btn-orange" type="submit">Zapisz kurs</button>
+            <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

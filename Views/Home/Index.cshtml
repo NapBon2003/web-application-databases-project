@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Kondensator wiedzy – Kursy Elektroniki";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+
+    <!-- sekcja w zależności od roli (na górze) -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <div class="alert alert-dark border-orange mb-5">
+                <h4 class="alert-heading">Panel administratora</h4>
+                <p>Jesteś zalogowany jako ADMINISTRATOR</p>
+                <hr/>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-dark border-orange mb-5">
+                <h4 class="alert-heading">Twoje konto</h4>
+                <p>Jesteś zalogowany jako @User.Identity.Name.ToUpper()</p>
+                <hr/>
+            </div>
+
+        }
+    }
+    else
+    {
+        <div class="alert alert-dark border-orange mb-5">
+            <h4 class="alert-heading">Witaj, gościu!</h4>
+            <p>Nie jesteś zalogowany. Zaloguj się lub zarejestruj, aby zapisywać się na kursy i śledzić postępy.</p>
+            <hr/>
+        </div>
+    }
+
+
+    <!-- header (nagłówek) -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Kondensator wiedzy</h1>
+        <p class="lead">
+            Twoja platforma edukacyjna poświęcona elektronice – od podstawowych zagadnień aż po zaawansowane projekty.
+        </p>
+    </div>
+    <div class="mb-5">
+        <img src="~/images/banner.png" alt="Baner edukacyjny" class="img-fluid w-100 rounded shadow" />
+    </div>
+    <!-- sekcja opisu platformy -->
+    <div class="row mb-5">
+        <!-- O platformie (jako wyróżniony pasek) -->
+        <div class="col-md-6">
+            <div class="bg-secondary text-light p-4 h-100 rounded shadow-sm">
+                <h2>O platformie</h2>
+                <p>
+                    Nasza misja to dostarczenie wiedzy w przystępny sposób. Kursy są podzielone na moduły,
+                    które prowadzą Cię krok po kroku przez teorię i praktykę. Dzięki zapisom możesz śledzić
+                    swoje postępy i wracać do materiałów w dowolnym momencie.
+                </p>
+            </div>
+        </div>
+
+        <!-- co znajdziesz -->
+        <div class="col-md-6">
+            <div class="btn-orange text-light p-4 h-100 rounded shadow-sm">
+                <h2>O naszej misji</h2>
+                <p>
+                    Chcemy stworzyć jedną z największych platform do nauki elektroniki! Jesteśmy gotowi na to, aby przygotować dla was jak najwięcej wiedzy i specjalistów, którzy
+                    będą starać się przedstawić wam wiedzę w najlepszy możliwy sposób!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- sekcja zalet w kartach -->
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="card bg-dark border-light h-100 shadow-sm">
+                <img src="~/images/2.png" alt="Praktyczne kursy" class="img-fluid rounded mb-3" />
+                <div class="card-body">
+                    <h5 class="card-title">Praktyczne kursy</h5>
+                    <p class="card-text">Uczysz się krok po kroku, od teorii do praktyki, z przykładami i ćwiczeniami.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark border-light h-100 shadow-sm">
+                <img src="~/images/3.png" alt="Modułowa nauka" class="img-fluid rounded mb-3" />
+                <div class="card-body">
+                    <h5 class="card-title">Modułowa nauka</h5>
+                    <p class="card-text">Każdy kurs podzielony jest na moduły, które ułatwiają systematyczną naukę.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark border-light h-100 shadow-sm">
+                <img src="~/images/1.png" alt="Śledzenie postępów" class="img-fluid rounded mb-3" />
+                <div class="card-body">
+                    <h5 class="card-title">Śledzenie postępów</h5>
+                    <p class="card-text">Dzięki zapisom (Enrollments) możesz monitorować swoje postępy w kursach.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5 mb-5">
+        <a asp-controller="Courses" asp-action="Index" class="btn btn-outline-light btn-lg">
+            Zobacz wszystkie kursy
+        </a>
+    </div>
+</div>

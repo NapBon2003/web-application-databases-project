@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ElectronicCourses.Models.Module>
+@{
+    ViewData["Title"] = "Modules";
+}
+
+<h2>Modules</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Order</th>
+            <th>Course</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var module in Model)
+        {
+            <tr>
+                <td>@module.Title</td>
+                <td>@module.Order</td>
+                <td>@module.Course?.Title</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@module.Id" class="btn btn-info btn-sm">Details</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@module.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@module.Id" class="btn btn-danger btn-sm">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" class="btn btn-success">Add Module</a>
+}

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ElectronicCourses.Models.Course>
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Lista kursów";
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var isAuthenticated = User.Identity.IsAuthenticated;
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <!-- nagłówek -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Dostępne kursy</h1>
+        <p class="lead">Nasza gama kursów ciągle się powiększa, a poniżej znajdziesz aktualnie dostępne kursy na naszej stronie </p>
+    </div>
+
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            var isEnrolled = isAuthenticated && course.Enrollments.Any(e => e.UserId == userId);
+
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark border-light h-100">
+
+                    <!-- pasek informacyjny-->
+                    <div class="text-center mb-0 rounded-0" style="min-height:40px;">
+                        @if (isEnrolled)
+                        {
+                            <div class="alert alert-success py-2 mb-0">
+                                Już bierzesz udział w tym kursie!
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- placeholder -->
+                            <div class="py-2 mb-0">&nbsp;</div>
+                        }
+                    </div>
+
+                    <img src="@(string.IsNullOrEmpty(course.CoverImagePath)
+                                      ? Url.Content("~/images/default_course.jpg")
+                                      : course.CoverImagePath)"
+                         class="card-img-top"
+                         alt="Obrazek kursu"
+                         style="max-height:200px; object-fit:cover;" />
+
+                    <div class="card-body text-light">
+                        <h5 class="card-title">@course.Title</h5>
+                        <p><strong>Czas trwania: @course.Hours godzin</strong></p>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id" class="btn btn-orange">
+                            Przejdź do kursu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

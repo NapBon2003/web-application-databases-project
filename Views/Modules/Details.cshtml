@@ -1,0 +1,47 @@
+﻿@model ElectronicCourses.Models.Module
+
+@{
+    ViewData["Title"] = "Szczegóły modułu";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <!-- nagłówek -->
+    <div class="text-center mb-4">
+        <h2 class="display-5">@Model.Title</h2>
+        <p class="lead">Moduł nr @Model.Order w kursie: @Model.Course?.Title</p>
+    </div>
+
+    <!-- player wideo -->
+    @if (!string.IsNullOrEmpty(Model.VideoPath))
+    {
+        <div class="card bg-dark border-light shadow-sm mb-4">
+            <video controls width="100%" class="rounded">
+                <source src="@Model.VideoPath" type="video/mp4" />
+                Twoja przeglądarka nie obsługuje wideo.
+            </video>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-dark border-orange text-center">
+            Brak materiałów wideo dla tego modułu.
+        </div>
+    }
+
+    <!-- treść modułu -->
+    <div class="card bg-dark border-light shadow-sm p-3">
+        @if (!string.IsNullOrEmpty(Model.Content))
+        {
+            <p>@Model.Content</p>
+        }
+        else
+        {
+            <p class="text-muted">Brak treści dla tego modułu.</p>
+        }
+    </div>
+
+    <div class="mt-4 text-center">
+        <a asp-controller="Courses" asp-action="Details" asp-route-id="@Model.CourseId"
+           class="btn btn-orange"> Powrót do kursu</a>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿html {
+    font-size: 14px;
+}
+
+.btn-orange {
+    background-color: #e8831a;
+    color: #fff;
+    border: none;
+}
+
+    .btn-orange:hover {
+        background-color: #cf6f12;
+        color: #fff;
+    }
+
+body {
+    padding-top: 170px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+.module-card {
+    border-radius: 12px;
+}
+
+
+.module-item {
+    background-color: #2b2e33;
+    color: #ddd;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+
+.module-item:hover {
+    background-color: #343a40;
+}
+
+
+.module-item.active {
+    background-color: #e8831a;
+    color: #fff;
+    box-shadow: 0 0 0 2px rgba(255,122,0,0.35) inset;
+}
+
+.module-item .video-duration {
+    display: none;
+}
+
+.module-item.active .video-duration {
+    display: inline;
+    font-weight: 600;
+}

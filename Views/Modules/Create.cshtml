@@ -1,0 +1,63 @@
+﻿@model ElectronicCourses.Models.Module
+
+@{
+    ViewData["Title"] = "Dodaj moduł";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <!-- header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Dodaj nowy moduł</h1>
+        <p class="lead">Uzupełnij poniższe pola, aby utworzyć moduł dla wybranego kursu.</p>
+    </div>
+
+    <!-- formularz  -->
+    <form asp-action="Create" method="post" class="shadow-lg p-4 rounded bg-dark border border-secondary" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <!-- tytuł -->
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label fw-bold"></label>
+            <input asp-for="Title" class="form-control bg-dark text-light border-secondary" placeholder="Wpisz tytuł modułu" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <!-- kolejność -->
+        <div class="mb-3">
+            <label asp-for="Order" class="form-label fw-bold"></label>
+            <input asp-for="Order" type="number" min="1" class="form-control bg-dark text-light border-secondary" placeholder="Podaj kolejność modułu" />
+            <span asp-validation-for="Order" class="text-danger"></span>
+        </div>
+
+        <!-- wybór kursu -->
+        <div class="mb-3">
+            <label asp-for="CourseId" class="form-label fw-bold">Kurs</label>
+            <select asp-for="CourseId" class="form-select bg-dark text-light border-secondary"
+                    asp-items="ViewBag.CourseId"></select>
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+        </div>
+
+        <!-- treść modułu -->
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label fw-bold"></label>
+            <textarea asp-for="Content" class="form-control bg-dark text-light border-secondary" rows="4" placeholder="Dodaj treść modułu"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <!-- filmik modułu -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Filmik modułu</label>
+            <input type="file" name="VideoFile" class="form-control bg-dark text-light border-secondary" />
+        </div>
+        <!-- przyciski -->
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-orange">Zapisz moduł</button>
+            <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

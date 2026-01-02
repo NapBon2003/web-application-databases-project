@@ -1,0 +1,110 @@
+﻿@model ElectronicCourses.Models.Course
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card module-card bg-dark border-light shadow-sm p-3">
+            <h5 class="text-light mb-3 text-center">Moduły</h5>
+
+            <div id="modulesList">
+                @foreach (var module in Model.Modules.OrderBy(m => m.Order))
+                {
+                    <div class="module-item d-flex flex-column mb-3 p-3 rounded"
+                         data-videopath="@module.VideoPath"
+                         data-content="@module.Content"
+                         data-id="@module.Id">
+
+                        <!-- ikonka svg z wwwroot/images -->
+                        <div class="mb-2">
+                            <img src="~/images/icons/movie_icon.svg"
+                                 alt="Ikona modułu"
+                                 style="width:auto; height:20px; fill:#e8831a;" />
+                        </div>
+
+                        <!-- tytuł i czas -->
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <span class="module-title fw-bold">@module.Order. @module.Title</span>
+                            <span class="video-duration text-light d-none" data-id="@module.Id">⏱ 0:00</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- video player card (karta z filmem) -->
+    <div class="col-md-8">
+        <div class="card bg-dark border-light shadow-sm p-3">
+            <video id="modulePlayer" controls width="100%" class="rounded shadow">
+                <source src="" type="video/mp4" />
+                Twoja przeglądarka nie obsługuje wideo.
+            </video>
+
+            <div class="mt-3">
+                <p id="moduleContent" class="text-light"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // pobieranie elementów modułów
+            const items = document.querySelectorAll(".module-item");
+            const player = document.getElementById("modulePlayer");
+            const source = player.querySelector("source");
+            const content = document.getElementById("moduleContent");
+
+            let currentModuleId = null;
+
+            // resetowanie aktywnych modułów
+            function resetModules() {
+                items.forEach(i => {
+                    i.classList.remove("active");
+                    const dur = i.querySelector(".video-duration");
+                    if (dur) dur.classList.add("d-none");
+                });
+            }
+
+            // funkcja klikania
+            items.forEach(item => {
+                item.addEventListener("click", function () {
+                    const videoPath = this.getAttribute("data-videopath");
+                    const moduleContent = this.getAttribute("data-content");
+                    currentModuleId = this.getAttribute("data-id");
+
+                    resetModules();
+                    this.classList.add("active");
+
+                    if (videoPath) {
+                        source.src = videoPath;
+                        player.load();
+                    }
+                    // wyświetlanie treści modułu
+                    content.textContent = moduleContent || "Brak treści dla tego modułu.";
+                });
+            });
+
+
+            player.addEventListener("loadedmetadata", function () {
+
+                // calculating time (obliczanie czasu)
+                const totalSeconds = Math.floor(player.duration);
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                const formatted = `CZAS TRWANIA - ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                const durationSpan = document.querySelector(`.module-item.active .video-duration`);
+
+                // display time (wyświetlanie czasu trwania)
+                if (durationSpan) {
+                    durationSpan.textContent = formatted;
+                    durationSpan.classList.remove("d-none");
+                }
+            });
+        });
+    </script>
+}

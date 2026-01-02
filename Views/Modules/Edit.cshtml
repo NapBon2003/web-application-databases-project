@@ -1,0 +1,70 @@
+﻿@model ElectronicCourses.Models.Module
+
+@{
+    ViewData["Title"] = "Edytuj moduł";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Edytuj moduł</h1>
+        <p class="lead">Wprowadź zmiany w szczegółach modułu.</p>
+    </div>
+
+    <form asp-action="Edit" method="post" class="shadow-lg p-4 rounded bg-dark border border-secondary" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <!-- tytuł -->
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label fw-bold"></label>
+            <input asp-for="Title" class="form-control bg-dark text-light border-secondary" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <!-- kolejność -->
+        <div class="mb-3">
+            <label asp-for="Order" class="form-label fw-bold"></label>
+            <input asp-for="Order" type="number" min="1" class="form-control bg-dark text-light border-secondary" />
+            <span asp-validation-for="Order" class="text-danger"></span>
+        </div>
+
+        <!-- kurs -->
+        <div class="mb-3">
+            <label asp-for="CourseId" class="form-label fw-bold">Kurs</label>
+            <select asp-for="CourseId" class="form-select bg-dark text-light border-secondary"
+                    asp-items="ViewBag.CourseId"></select>
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+        </div>
+
+        <!-- treść -->
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label fw-bold"></label>
+            <textarea asp-for="Content" class="form-control bg-dark text-light border-secondary" rows="4"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <!-- film modułu -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Film modułu</label>
+            <input type="file" name="VideoFile" class="form-control bg-dark text-light border-secondary" />
+            @if (!string.IsNullOrEmpty(Model.VideoPath))
+            {
+                <div class="mt-2">
+                    <video controls width="100%" src="@Model.VideoPath">
+                        Twoja przeglądarka nie obsługuje wideo. Spróbuj innej lub skontaktuj się z nami
+                    </video>
+                </div>
+            }
+        </div>
+        <!-- przyciski -->
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-orange">Zapisz zmiany</button>
+            <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,26 @@
+﻿@model ElectronicCourses.Models.Module
+
+@{
+    ViewData["Title"] = "Usuń moduł";
+}
+
+<div class="container mt-4 bg-dark text-light p-4 rounded">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Usuń moduł</h1>
+        <p class="lead">Czy na pewno chcesz usunąć ten moduł?</p>
+    </div>
+
+    <div class="alert alert-warning">
+        <h4>@Model.Title</h4>
+        <p>@Model.Content</p>
+        <p><strong>Kolejność:</strong> @Model.Order</p>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-danger">Usuń moduł</button>
+            <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+        </div>
+    </form>
+</div>

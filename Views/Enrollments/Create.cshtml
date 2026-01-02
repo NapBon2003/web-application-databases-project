@@ -1,0 +1,12 @@
+﻿@model Enrollment
+@{
+    var course = ViewBag.Course as Course;
+    ViewData["Title"] = "Enroll in " + course!.Title;
+}
+<h2>Enroll in @course!.Title</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" name="courseId" value="@course!.Id" />
+    <p>Zapisujesz się na: <strong>@course.Title</strong></p>
+    <button class="btn btn-success" type="submit">Enroll</button>
+</form>
