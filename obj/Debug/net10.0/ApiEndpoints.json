@@ -1,1 +1,81 @@
-[]
+[
+  {
+    "ContainingType": "ElectronicCourses.Controllers.CoursesApiController",
+    "Method": "GetCourses",
+    "RelativePath": "api/CoursesApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ElectronicCourses.Controllers.CoursesApiController",
+    "Method": "CreateCourse",
+    "RelativePath": "api/CoursesApi",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "course",
+        "Type": "ElectronicCourses.Models.Course",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ElectronicCourses.Controllers.CoursesApiController",
+    "Method": "GetCourse",
+    "RelativePath": "api/CoursesApi/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ElectronicCourses.Controllers.CoursesApiController",
+    "Method": "UpdateCourse",
+    "RelativePath": "api/CoursesApi/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "course",
+        "Type": "ElectronicCourses.Models.Course",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ElectronicCourses.Controllers.CoursesApiController",
+    "Method": "DeleteCourse",
+    "RelativePath": "api/CoursesApi/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

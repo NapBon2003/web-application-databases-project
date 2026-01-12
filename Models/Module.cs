@@ -7,10 +7,12 @@ namespace ElectronicCourses.Models
     {
         public int Id { get; set; }
 
-        [Required] 
-        // title is required (wymagamy tytuł) 
+        [Required(ErrorMessage = "Tytuł modułu jest wymagany.")]
+        [StringLength(85, ErrorMessage = "Tytuł może mieć maksymalnie 85 znaków.")]
         public string Title { get; set; } = default!;
 
+        [Required(ErrorMessage = "Treść modułu jest wymagana.")]
+        [StringLength(3000, ErrorMessage = "Treść może mieć maksymalnie 3000 znaków.")]
         public string? Content { get; set; }
         public int Order { get; set; }
 

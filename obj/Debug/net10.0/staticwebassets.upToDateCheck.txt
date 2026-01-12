@@ -75,10 +75,7 @@ wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\videos\modules\123.mp4
-wwwroot\videos\modules\mo.mp4
-F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\favicon.ico
-F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\favicon.svg
-F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\images\icons\movie_icon.svg
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\css\site.css
 F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\js\site.js
 F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -139,4 +136,6 @@ F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\lib\jquery\dist\jquery
 F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\lib\jquery\dist\jquery.slim.min.js
 F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\lib\jquery\dist\jquery.slim.min.map
 F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\lib\jquery\LICENSE.txt
-F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\css\site.css
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\images\icons\movie_icon.svg
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\favicon.svg
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\favicon.ico
