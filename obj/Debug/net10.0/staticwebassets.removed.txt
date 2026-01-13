@@ -1,0 +1,3 @@
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\images\covers\cover.jpg
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\images\covers\maserati-mc20.jpg
+F:\ProjektMVC\ElectronicCourses\ElectronicCourses\wwwroot\images\covers\unnamed (1).jpg

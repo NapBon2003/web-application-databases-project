@@ -6,10 +6,7 @@ wwwroot\images\1.png
 wwwroot\images\2.png
 wwwroot\images\3.png
 wwwroot\images\banner.png
-wwwroot\images\covers\cover.jpg
-wwwroot\images\covers\maserati-mc20.jpg
 wwwroot\images\covers\TEST.jpg
-wwwroot\images\covers\unnamed (1).jpg
 wwwroot\images\default_course.jpg
 wwwroot\images\icons\movie_icon.svg
 wwwroot\images\logo.png

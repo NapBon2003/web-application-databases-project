@@ -107,29 +107,37 @@ public class CoursesController : Controller
     [HttpPost]
     [Authorize(Roles = "Admin")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, Course course, IFormFile CoverImage)
+    public async Task<IActionResult> Edit(int id, Course course, IFormFile? CoverImage)
     {
         if (id != course.Id) return NotFound();
 
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            if (CoverImage != null && CoverImage.Length > 0)
-            {
-                var fileName = Path.GetFileName(CoverImage.FileName);
-                var savePath = Path.Combine("wwwroot/images/covers", fileName);
-
-                using var stream = new FileStream(savePath, FileMode.Create);
-                await CoverImage.CopyToAsync(stream);
-
-                course.CoverImagePath = "/images/covers/" + fileName;
-            }
-
-            _db.Update(course);
-            await _db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(course);
         }
 
-        return View(course);
+        var existingCourse = await _db.Courses.FindAsync(id);
+        if (existingCourse == null) return NotFound();
+
+        existingCourse.Title = course.Title;
+        existingCourse.Description = course.Description;
+        existingCourse.Hours = course.Hours;
+
+        if (CoverImage is { Length: > 0 })
+        {
+            var fileName = Path.GetFileName(CoverImage.FileName);
+            var dir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "covers");
+            Directory.CreateDirectory(dir);
+            var savePath = Path.Combine(dir, fileName);
+
+            using var stream = new FileStream(savePath, FileMode.Create);
+            await CoverImage.CopyToAsync(stream);
+
+            existingCourse.CoverImagePath = "/images/covers/" + fileName;
+        }
+
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
 
 
