@@ -36,7 +36,7 @@
         
     @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
         {
-            if (isEnrolled)
+            if (isEnrolled && Model.Modules != null && Model.Modules.Any())
             {
                 <a asp-controller="Courses" asp-action="Player" asp-route-id="@Model.Id"
                    class="btn btn-orange btn-lg mt-3">▶️ Otwórz kurs</a>
@@ -45,7 +45,7 @@
     <!-- lista modułów dla kursu-->
     @if (isEnrolled || User.IsInRole("Admin"))
     {
-        <div class="mb-5">
+        <div class="mb-5 mt-5">
             <h3>Moduły kursu</h3>
             @if (Model.Modules == null || !Model.Modules.Any())
             {
@@ -112,16 +112,16 @@
         }
         else if (User.IsInRole("Admin"))
         {
-            <div class="alert alert-warning mt-3">
+            <div class="alert alert-warning mb-5 mt-5">
                 Administrator nie może zapisywać się na kursy.
             </div>
 
             <div class="mt-3 d-flex justify-content-center gap-3">
                 <a asp-controller="Courses" asp-action="Edit" asp-route-id="@Model.Id"
-                   class="btn btn-info btn-lg">✏️ Edytuj kurs</a>
+                   class="btn btn-info btn-lg">Edytuj kurs</a>
 
                 <a asp-controller="Courses" asp-action="Delete" asp-route-id="@Model.Id"
-                   class="btn btn-danger btn-lg">🗑 Usuń kurs</a>
+                   class="btn btn-danger btn-lg">Usuń kurs</a>
             </div>
         }
         else
